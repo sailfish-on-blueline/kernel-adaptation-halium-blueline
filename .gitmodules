@@ -1,24 +1,24 @@
 [submodule "kernel-adaptation-simplified"]
 	path = kernel-adaptation-simplified
-	url = https://github.com/HelloVolla/kernel-adaptation-simplified.git
+	url = https://github.com/sailfish-on-blueline/kernel-adaptation-simplified.git
 [submodule "linux"]
 	path = linux
-	url = https://android.googlesource.com/kernel/msm
+	url = https://github.com/sailfish-on-blueline/kernel-msm.git
 [submodule "wlan/fw-api"]
 	path = wlan/fw-api
-	url = https://android.googlesource.com/kernel/msm-modules/wlan-fw-api
+	url = https://github.com/sailfish-on-blueline/wlan-fw-api.git
 [submodule "wlan/qca-wifi-host-cmn"]
 	path = wlan/qca-wifi-host-cmn
-	url = https://android.googlesource.com/kernel/msm-modules/qca-wfi-host-cmn
+	url = https://github.com/sailfish-on-blueline/wlan-qca-wifi-host-cmn.git
 [submodule "wlan/qcacld-3.0"]
 	path = wlan/qcacld-3.0
-	url = https://android.googlesource.com/kernel/msm-modules/qcacld
+	url = https://github.com/sailfish-on-blueline/wlan-qcacld-3.0.git
 [submodule "audio"]
 	path = audio
-	url = https://android.googlesource.com/kernel/msm-extra
+	url = https://github.com/sailfish-on-blueline/kernel-msm-extra.git
 [submodule "mkbootimg"]
 	path = mkbootimg
-	url = https://android.googlesource.com/platform/system/tools/mkbootimg
+	url = https://github.com/sailfish-on-blueline/mkbootimg.git
 [submodule "avb"]
 	path = avb
-	url = https://android.googlesource.com/platform/external/avb
+	url = https://github.com/sailfish-on-blueline/avb.git

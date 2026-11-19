@@ -13,7 +13,7 @@ scripts/build-rpm.sh
 
 Use AOSP Clang 12.0.5/r416183b and the AOSP Android 4.9 GCC/binutils prebuilts for aarch64 and arm. `configs/aosp-kernel-manifest.xml` records their upstream locations. Host dependencies include GNU make, GCC, flex, bison, bc, dtc, lz4, openssl, Python 3, patch, tar, kmod and rpmbuild. `BLUELINE_BUILD_JOBS` defaults to 6. LLVM LTO requires sufficient RAM for linking.
 
-`linux`, `audio`, `wlan/fw-api`, `wlan/qca-wifi-host-cmn`, `wlan/qcacld-3.0`, `kernel-adaptation-simplified`, `mkbootimg` and `avb` are pinned Git submodules. `scripts/prepare-sources.sh` applies the local kernel patch, copies the separate AOSP audio sources into `linux/techpack/audio`, and creates the patched packaging include in `build`. Builds use `linux/out`. The RPM build consumes the compiled kernel and modules.
+`linux`, `audio`, `wlan/fw-api`, `wlan/qca-wifi-host-cmn`, `wlan/qcacld-3.0`, `kernel-adaptation-simplified`, `mkbootimg` and `avb` are pinned Git submodules hosted under `sailfish-on-blueline`. The dependency repositories import the fixed upstream source trees. Their original URLs, commits and tree hashes are recorded in `configs/upstream-revisions.json`. `scripts/prepare-sources.sh` applies the local kernel patch, copies the separate AOSP audio sources into `linux/techpack/audio`, and creates the patched packaging include in `build`. Builds use `linux/out`. The RPM build consumes the compiled kernel and modules.
 
 `configs/halium-blueline.config` is merged over Google's `b1c1_defconfig`. It enables Smack and the Sailfish container/device interfaces, disables Qualcomm PFK and Android paranoid networking, and builds the external WLAN module.
 

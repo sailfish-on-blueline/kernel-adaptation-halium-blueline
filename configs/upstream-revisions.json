@@ -1,0 +1,42 @@
+{
+  "linux": {
+    "upstream_url": "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP//kernel/msm",
+    "upstream_commit": "862f51bac900c4b8a6e31792369e588bb395b8a3",
+    "tree": "b6391aba947566bec1b1a9344c04eae157c604d3"
+  },
+  "audio": {
+    "upstream_url": "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP//kernel/msm-extra",
+    "upstream_commit": "11cdada77cf35718aa752130d25ba039ce38ca28",
+    "tree": "649bf97ad3ee0e47292c737fca7cf9176972e274"
+  },
+  "kernel-adaptation-simplified": {
+    "upstream_url": "https://github.com/HelloVolla/kernel-adaptation-simplified.git",
+    "upstream_commit": "e9785416a61d98ccb0793e11fd306495411a84f1",
+    "tree": "5a97bd5c6eccee72be4a0a16c2f67056265a6157"
+  },
+  "wlan/fw-api": {
+    "upstream_url": "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP//kernel/msm-modules/wlan-fw-api",
+    "upstream_commit": "f0fd7e2fcfa46be30b793032c7d421f6adcebb05",
+    "tree": "df5a7d58f629427e823a773ecd03a1a949ba7cf4"
+  },
+  "wlan/qca-wifi-host-cmn": {
+    "upstream_url": "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP//kernel/msm-modules/qca-wfi-host-cmn",
+    "upstream_commit": "8bdd717f707f263881a2af0abf854ecfce3b1e4c",
+    "tree": "c0bcfd663af5c4421d5cd61948102a8e95b54b71"
+  },
+  "wlan/qcacld-3.0": {
+    "upstream_url": "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP//kernel/msm-modules/qcacld",
+    "upstream_commit": "93bd2df200cde2c6c9494d6f5c0bac3822fb6401",
+    "tree": "856fa0de683097fbccd0291cc90fc468ed3ae1f2"
+  },
+  "mkbootimg": {
+    "upstream_url": "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP//platform/system/tools/mkbootimg",
+    "upstream_commit": "d2bb0af5ba6d3198a3e99529c97eda1be0b5a093",
+    "tree": "c45163bf1cdb731e3bdd90d69d54c8e92004d673"
+  },
+  "avb": {
+    "upstream_url": "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP//platform/external/avb",
+    "upstream_commit": "20bfb02ac7425246c2952f6eaada9e43c4733349",
+    "tree": "db4292daabba08af74e1454d8068452f869ad044"
+  }
+}
