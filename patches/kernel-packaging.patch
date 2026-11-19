@@ -1,0 +1,43 @@
+diff --git a/kernel-adaptation-simplified.inc b/kernel-adaptation-simplified.inc
+index 963ee25..6848975 100644
+--- a/kernel-adaptation-simplified.inc
++++ b/kernel-adaptation-simplified.inc
+@@ -127,13 +127,13 @@ echo "***** Applying patches *****"
+ sh patches/apply-patches.sh %{source_directory}
+ %endif
+ 
+-%if 0%{?build_Image:1}
++%if %{build_Image}
+ echo "***** Building Image *****"
+ make %{?makeopts} -C %{source_directory} -j$(nproc) O=out %{?kcflags} %{kernel_config}
+ make %{?makeopts} -C %{source_directory} -j$(nproc) O=out %{?kcflags}
+ %endif
+ 
+-%if 0%{?build_modules:1}
++%if %{build_modules}
+ echo "***** Building Modules *****"
+ make %{?makeopts} -C %{source_directory} -j$(nproc) O=out %{?kcflags} modules
+ %endif
+@@ -172,6 +172,12 @@ fi
+ %if %{build_modules}
+ mkdir -p %{buildroot}/lib/modules
+ make -C %{source_directory} O=out %{?makeopts} INSTALL_MOD_STRIP=1 modules_install INSTALL_MOD_PATH=%{buildroot}
++%if 0%{?extra_modules:1}
++for module in %{extra_modules}; do
++    make -C %{source_directory} O=out %{?makeopts} %{?extra_modules_makeopts} M="$(readlink -f "$PWD/$module")" INSTALL_MOD_STRIP=1 modules_install INSTALL_MOD_PATH=%{buildroot}
++done
++%endif
++rm -f %{buildroot}/lib/modules/*/build %{buildroot}/lib/modules/*/source
+ %endif
+ 
+ mkdir -p %{buildroot}/lib/udev/rules.d
+@@ -300,8 +306,8 @@ cp %{source_directory}/out/arch/%{kernel_arch}/boot/*Image* %{buildroot}/boot/
+ %if 0%{?deviceinfo_dtb:1}
+ cp %{source_directory}/out/arch/%{kernel_arch}/boot/dts/%{deviceinfo_dtb} %{buildroot}/boot/ || true
+ %endif
+-cp %{source_directory}/out/arch/%{kernel_arch}/boot/boot.img %{buildroot}/boot/%{?bootimg_name} || true
+ %endif
++cp "$OUT" %{buildroot}/boot/%{?bootimg_name}
+ 
+ %if 0%{?devicetrees:1}
+ for dtb in %{devicetrees}; do

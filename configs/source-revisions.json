@@ -1,0 +1,10 @@
+{
+  "linux": "862f51bac900c4b8a6e31792369e588bb395b8a3",
+  "audio": "11cdada77cf35718aa752130d25ba039ce38ca28",
+  "wlan/fw-api": "f0fd7e2fcfa46be30b793032c7d421f6adcebb05",
+  "wlan/qca-wifi-host-cmn": "8bdd717f707f263881a2af0abf854ecfce3b1e4c",
+  "wlan/qcacld-3.0": "93bd2df200cde2c6c9494d6f5c0bac3822fb6401",
+  "kernel-adaptation-simplified": "e9785416a61d98ccb0793e11fd306495411a84f1",
+  "mkbootimg": "d2bb0af5ba6d3198a3e99529c97eda1be0b5a093",
+  "avb": "20bfb02ac7425246c2952f6eaada9e43c4733349"
+}

@@ -1,0 +1,24 @@
+[submodule "kernel-adaptation-simplified"]
+	path = kernel-adaptation-simplified
+	url = https://github.com/HelloVolla/kernel-adaptation-simplified.git
+[submodule "linux"]
+	path = linux
+	url = https://android.googlesource.com/kernel/msm
+[submodule "wlan/fw-api"]
+	path = wlan/fw-api
+	url = https://android.googlesource.com/kernel/msm-modules/wlan-fw-api
+[submodule "wlan/qca-wifi-host-cmn"]
+	path = wlan/qca-wifi-host-cmn
+	url = https://android.googlesource.com/kernel/msm-modules/qca-wfi-host-cmn
+[submodule "wlan/qcacld-3.0"]
+	path = wlan/qcacld-3.0
+	url = https://android.googlesource.com/kernel/msm-modules/qcacld
+[submodule "audio"]
+	path = audio
+	url = https://android.googlesource.com/kernel/msm-extra
+[submodule "mkbootimg"]
+	path = mkbootimg
+	url = https://android.googlesource.com/platform/system/tools/mkbootimg
+[submodule "avb"]
+	path = avb
+	url = https://android.googlesource.com/platform/external/avb

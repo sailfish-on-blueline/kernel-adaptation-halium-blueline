@@ -1,0 +1,71 @@
+diff --git a/drivers/usb/gadget/function/Makefile b/drivers/usb/gadget/function/Makefile
+index b8fa93e6..21b4af9a 100644
+--- a/drivers/usb/gadget/function/Makefile
++++ b/drivers/usb/gadget/function/Makefile
+@@ -61,6 +61,12 @@ obj-$(CONFIG_USB_F_CDEV)	+= usb_f_cdev.o
+ usb_f_ccid-y			:= f_ccid.o
+ obj-$(CONFIG_USB_F_CCID)   	+= usb_f_ccid.o
+ usb_f_gsi-y			:= f_gsi.o rndis.o
++ifeq ($(CONFIG_USB_F_GSI),y)
++ifeq ($(CONFIG_USB_F_RNDIS),y)
++# Built-in standard RNDIS already supplies the shared parser and exports.
++usb_f_gsi-y                    := f_gsi.o
++endif
++endif
+ obj-$(CONFIG_USB_F_GSI)         += usb_f_gsi.o
+ usb_f_qdss-y			:= f_qdss.o u_qdss.o
+ obj-$(CONFIG_USB_F_QDSS)        += usb_f_qdss.o
+diff --git a/drivers/usb/gadget/function/rndis.c b/drivers/usb/gadget/function/rndis.c
+index 038993d2..9904bff6 100644
+--- a/drivers/usb/gadget/function/rndis.c
++++ b/drivers/usb/gadget/function/rndis.c
+@@ -22,6 +22,7 @@
+  */
+ 
+ #include <linux/module.h>
++
+ #include <linux/moduleparam.h>
+ #include <linux/kernel.h>
+ #include <linux/errno.h>
+diff --git a/include/linux/kallsyms.h b/include/linux/kallsyms.h
+index 6883e197..711a50f6 100644
+--- a/include/linux/kallsyms.h
++++ b/include/linux/kallsyms.h
+@@ -9,7 +9,7 @@
+ #include <linux/kernel.h>
+ #include <linux/stddef.h>
+ 
+-#define KSYM_NAME_LEN 128
++#define KSYM_NAME_LEN 256
+ #define KSYM_SYMBOL_LEN (sizeof("%s+%#lx/%#lx [%s]") + (KSYM_NAME_LEN - 1) + \
+ 			 2*(BITS_PER_LONG*3/10) + (MODULE_NAME_LEN - 1) + 1)
+ 
+diff --git a/init/initramfs.c b/init/initramfs.c
+index bf3af10c..160f40c2 100644
+--- a/init/initramfs.c
++++ b/init/initramfs.c
+@@ -611,9 +611,8 @@ static int __initdata do_skip_initramfs;
+ 
+ static int __init skip_initramfs_param(char *str)
+ {
+-	if (*str)
+-		return 0;
+-	do_skip_initramfs = 1;
++	/* Halium boots from its own ramdisk, including normal A/B boots. */
++	do_skip_initramfs = 0;
+ 	return 1;
+ }
+ __setup("skip_initramfs", skip_initramfs_param);
+diff --git a/scripts/kallsyms.c b/scripts/kallsyms.c
+index 6402b0d3..bff5dee8 100644
+--- a/scripts/kallsyms.c
++++ b/scripts/kallsyms.c
+@@ -28,7 +28,7 @@
+ #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
+ #endif
+ 
+-#define KSYM_NAME_LEN		128
++#define KSYM_NAME_LEN		256
+ 
+ struct sym_entry {
+ 	unsigned long long addr;
