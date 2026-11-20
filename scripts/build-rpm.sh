@@ -16,4 +16,8 @@ rpmbuild --build-in-place --nodeps --target aarch64 \
     --define '_buildshell /bin/bash' --define '__os_install_post %{nil}' \
     --define 'debug_package %{nil}' --define '_binary_payload w6.xzdio' \
     -bb rpm/kernel-adaptation-halium-blueline.spec > "$root/logs/kernel-rpm.log" 2>&1
+edition=$(rpmspec -q --qf '%{VERSION}-%{RELEASE}' rpm/kernel-adaptation-halium-blueline.spec)
+package="$topdir/RPMS/aarch64/kernel-adaptation-halium-blueline-$edition.aarch64.rpm"
+release=$(make -s -C "$kernel" O=out CC=clang kernelrelease)
+rpm -qlp "$package" | grep -Fxq "/lib/modules/$release/extra/wlan.ko"
 printf 'Built kernel RPM in %s\n' "$topdir/RPMS"

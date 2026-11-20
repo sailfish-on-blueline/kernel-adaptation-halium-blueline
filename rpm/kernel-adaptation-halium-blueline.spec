@@ -37,5 +37,5 @@
 %define deviceinfo_bootimg_partition_size 67108864
 %define deviceinfo_kernel_cmdline console=ttyMSM0,115200n8 androidboot.console=ttyMSM0 printk.devkmsg=on msm_rtb.filter=0x237 ehci-hcd.park=3 service_locator.enable=1 cgroup.memory=nokmem lpm_levels.sleep_disabled=1 usbcore.autosuspend=7 loop.max_part=7 androidboot.boot_devices=soc/1d84000.ufshc systempart=/dev/disk/by-partlabel/userdata datapart=/dev/disk/by-partlabel/userdata boot=halium init=/init security=smack androidboot.selinux=permissive systemd.unified_cgroup_hierarchy=0 systemd.legacy_systemd_cgroup_controller=1
 Version: 4.9.270
-Release: 5
+Release: 7
 %include build/kernel-adaptation-simplified.inc

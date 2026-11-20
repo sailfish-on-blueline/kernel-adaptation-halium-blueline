@@ -1,6 +1,6 @@
 # Google Pixel 3 Halium 12 kernel adaptation
 
-Google AOSP Android 12 kernel for Pixel 3, based on `862f51bac900c4b8a6e31792369e588bb395b8a3`, producing `4.9.270-halium-blueline`. Release 5 contains the Smack/ext4 compatibility, Internet socket permissions and CS40L20 vibrator firmware fixes verified on the device.
+Google AOSP Android 12 kernel for Pixel 3, based on `862f51bac900c4b8a6e31792369e588bb395b8a3`, producing `4.9.270-halium-blueline`. Release 7 includes the Smack/ext4 compatibility, Internet socket permissions, CS40L20 vibrator firmware and MNH thermal retry fixes verified on the device. Its package contains all fifteen modules, including WLAN, with matching kernel symbol versions. External module builds accept relative and absolute source paths, and RPM validation checks the WLAN payload.
 
 ```sh
 git clone --recurse-submodules https://github.com/sailfish-on-blueline/kernel-adaptation-halium-blueline.git

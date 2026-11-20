@@ -1,8 +1,7 @@
 diff --git a/kernel-adaptation-simplified.inc b/kernel-adaptation-simplified.inc
-index 963ee25..6848975 100644
 --- a/kernel-adaptation-simplified.inc
 +++ b/kernel-adaptation-simplified.inc
-@@ -127,13 +127,13 @@ echo "***** Applying patches *****"
+@@ -127,15 +127,22 @@
  sh patches/apply-patches.sh %{source_directory}
  %endif
  
@@ -17,26 +16,38 @@ index 963ee25..6848975 100644
 +%if %{build_modules}
  echo "***** Building Modules *****"
  make %{?makeopts} -C %{source_directory} -j$(nproc) O=out %{?kcflags} modules
++%if 0%{?extra_modules:1}
++for module in %{extra_modules}; do
++    module_path=$(readlink -f "$module")
++    test -f "$module_path/Makefile"
++    make -C %{source_directory} O=out %{?makeopts} %{?extra_modules_makeopts} M="$module_path" -j$(nproc) modules
++done
++%endif
  %endif
-@@ -172,6 +172,12 @@ fi
+ 
+ %if 0%{?build_dtboimage:1}
+@@ -172,6 +179,14 @@
  %if %{build_modules}
  mkdir -p %{buildroot}/lib/modules
  make -C %{source_directory} O=out %{?makeopts} INSTALL_MOD_STRIP=1 modules_install INSTALL_MOD_PATH=%{buildroot}
 +%if 0%{?extra_modules:1}
 +for module in %{extra_modules}; do
-+    make -C %{source_directory} O=out %{?makeopts} %{?extra_modules_makeopts} M="$(readlink -f "$PWD/$module")" INSTALL_MOD_STRIP=1 modules_install INSTALL_MOD_PATH=%{buildroot}
++    module_path=$(readlink -f "$module")
++    test -f "$module_path/Makefile"
++    make -C %{source_directory} O=out %{?makeopts} %{?extra_modules_makeopts} M="$module_path" INSTALL_MOD_STRIP=1 modules_install INSTALL_MOD_PATH=%{buildroot}
 +done
 +%endif
 +rm -f %{buildroot}/lib/modules/*/build %{buildroot}/lib/modules/*/source
  %endif
  
  mkdir -p %{buildroot}/lib/udev/rules.d
-@@ -300,8 +306,8 @@ cp %{source_directory}/out/arch/%{kernel_arch}/boot/*Image* %{buildroot}/boot/
+@@ -300,8 +315,8 @@
  %if 0%{?deviceinfo_dtb:1}
  cp %{source_directory}/out/arch/%{kernel_arch}/boot/dts/%{deviceinfo_dtb} %{buildroot}/boot/ || true
  %endif
 -cp %{source_directory}/out/arch/%{kernel_arch}/boot/boot.img %{buildroot}/boot/%{?bootimg_name} || true
- %endif
+-%endif
++%endif
 +cp "$OUT" %{buildroot}/boot/%{?bootimg_name}
  
  %if 0%{?devicetrees:1}

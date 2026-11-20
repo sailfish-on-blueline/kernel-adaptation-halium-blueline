@@ -1,3 +1,33 @@
+diff --git a/drivers/misc/mnh/mnh-thermal.c b/drivers/misc/mnh/mnh-thermal.c
+index 2fb75e9d..16649162 100644
+--- a/drivers/misc/mnh/mnh-thermal.c
++++ b/drivers/misc/mnh/mnh-thermal.c
+@@ -86,8 +86,9 @@ static int check_mnh_hw_init(void)
+ {
+ 	int state = mnh_sm_get_state();
+ 
++	/* The sensors become readable when the coprocessor is powered again. */
+ 	if ((state == MNH_STATE_OFF) || (state == MNH_STATE_SUSPEND))
+-		return -EIO;
++		return -EAGAIN;
+ 
+ 	return 0;
+ }
+@@ -274,10 +275,12 @@ static int mnh_thermal_get_temp(void *data, int *temp_out)
+ 	struct mnh_thermal_sensor *sensor = (struct mnh_thermal_sensor *)data;
+ 	struct mnh_thermal_device *mnh_dev = sensor->mnh_dev;
+ 	int temp_raw = 0;
++	int ret;
+ 	uint32_t id = sensor->id;
+ 
+-	if (check_mnh_hw_init())
+-		return -EIO;
++	ret = check_mnh_hw_init();
++	if (ret)
++		return ret;
+ 
+ 	/* read dts trim data if it is not configured yet */
+ 	if (!mnh_dev->mnh_trim_init_done) {
 diff --git a/drivers/usb/gadget/function/Makefile b/drivers/usb/gadget/function/Makefile
 index b8fa93e6..21b4af9a 100644
 --- a/drivers/usb/gadget/function/Makefile
